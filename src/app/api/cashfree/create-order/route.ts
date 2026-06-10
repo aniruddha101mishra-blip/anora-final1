@@ -56,8 +56,28 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    // ── Persist order to localStorage via response (client will save) ──
-    // Optionally add Firebase here if FIREBASE_SERVICE_ACCOUNT is set
+    // ── Send order details to email via Formspree ──
+    try {
+      await fetch('https://formspree.io/f/xwvjodqp', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subject:    `New Order ${orderId} — ANORA`,
+          order_id:   orderId,
+          name:       customer.name,
+          phone:      customer.phone,
+          email:      customer.email || '—',
+          address:    `${customer.address}, ${customer.city}, ${customer.state} - ${customer.pin}`,
+          items:      items.map(i => `${i.name} × ${i.qty} = ₹${i.price * i.qty}`).join(' | '),
+          total:      `₹${total}`,
+          status:     'Payment Initiated',
+        }),
+      })
+      console.info('[API /create-order] Order notification sent to email ✓')
+    } catch (e) {
+      console.warn('[API /create-order] Email notification failed (non-critical):', e)
+    }
+
     console.info('[API /create-order] Success ✓ order:', orderId)
 
     return NextResponse.json({
