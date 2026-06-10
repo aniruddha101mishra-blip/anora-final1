@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { overflow-x: hidden; }
+}
+
+@layer utilities {
+  .gold-gradient {
+    background: linear-gradient(135deg, #C8A46A 0%, #b8904a 100%);
+  }
+  .border-gold-faint  { border-color: rgba(200,164,106,0.18); }
+  .border-gold-soft   { border-color: rgba(200,164,106,0.35); }
+  .text-gold-muted    { color: rgba(200,164,106,0.55); }
+  .bg-gold-tint       { background: rgba(200,164,106,0.06); }
+}
