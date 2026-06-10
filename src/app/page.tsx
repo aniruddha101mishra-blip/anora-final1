@@ -19,13 +19,16 @@ export default function Home() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <video
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
           autoPlay
           muted
           loop
           playsInline
+          disablePictureInPicture
+          disableRemotePlayback
           src="https://res.cloudinary.com/dtips5xbg/video/upload/v1780985161/anora_compressed_pbygd9.mp4"
           aria-hidden="true"
+          style={{ WebkitMediaControlsPanel: 'none' } as React.CSSProperties}
         />
         <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
