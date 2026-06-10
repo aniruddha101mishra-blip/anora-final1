@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ANORA Brand Heritage — The Art of Lasting Presence. Discover our story of luxury perfumery." />
+  <title>Heritage — ANORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Page-specific overrides ── */
+    .heritage-page-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+
+    .heritage-page-hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .heritage-page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(17,11,7,0.3), rgba(17,11,7,0.75));
+    }
+
+    .heritage-page-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .heritage-page-hero-content .section-eyebrow {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .heritage-page-hero-content h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .heritage-page-hero-content h1 em {
+      font-style: italic;
+      color: var(--vanilla);
+    }
+
+    .heritage-page-hero-content .heritage-sanskrit {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 1.3rem;
+      color: rgba(200,164,106,0.7);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* ── Story blocks ── */
+    .heritage-story {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+
+    .heritage-story-block {
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .heritage-story-block.reverse {
+      direction: rtl;
+    }
+
+    .heritage-story-block.reverse > * {
+      direction: ltr;
+    }
+
+    .heritage-story-block.full-width {
+      grid-template-columns: 1fr;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .heritage-story-text .section-eyebrow {
+      text-align: left;
+    }
+
+    .heritage-story-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--vanilla);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .heritage-story-text h2 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .heritage-story-text p {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: rgba(229,211,179,0.65);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .heritage-story-media {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border: 1px solid rgba(200,164,106,0.2);
+    }
+
+    .heritage-story-media video,
+    .heritage-story-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .heritage-story-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(200,164,106,0.05), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Values section ── */
+    .heritage-values {
+      background: var(--container);
+      border-top: 1px solid rgba(200,164,106,0.1);
+      border-bottom: 1px solid rgba(200,164,106,0.1);
+      padding: 100px 48px;
+    }
+
+    .heritage-values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .heritage-value-item {
+      text-align: center;
+      padding: 40px 24px;
+      border: 1px solid rgba(200,164,106,0.12);
+      transition: border-color 0.3s ease;
+    }
+
+    .heritage-value-item:hover {
+      border-color: rgba(200,164,106,0.35);
+    }
+
+    .heritage-value-number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--gold);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .heritage-value-label {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(229,211,179,0.5);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .heritage-value-desc {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: rgba(229,211,179,0.4);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Sanskrit quote ── */
+    .heritage-quote-section {
+      padding: 100px 48px;
+      text-align: center;
+      background: var(--bg);
+    }
+
+    .heritage-quote {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--gold);
+      font-style: italic;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+
+    .heritage-quote-translation {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: rgba(229,211,179,0.4);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      font-style: italic;
+    }
+
+    .heritage-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 40px auto;
+    }
+
+    /* ── CTA ── */
+    .heritage-cta-section {
+      padding: 80px 48px;
+      text-align: center;
+      background: var(--container);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .heritage-story {
+        padding: 64px 24px;
+      }
+
+      .heritage-story-block,
+      .heritage-story-block.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 32px;
+      }
+
+      .heritage-values-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .heritage-values {
+        padding: 64px 24px;
+      }
+
+      .heritage-quote-section {
+        padding: 64px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+
+  <!-- Grain Overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header id="header" role="banner">
+    <nav class="nav-container" role="navigation" aria-label="Main navigation">
+      <ul class="nav-links nav-left" role="list">
+        <li><a href="index.html#collection" class="nav-link">Collection</a></li>
+        <li><a href="heritage.html" class="nav-link">Heritage</a></li>
+      </ul>
+      <a href="index.html" class="logo" aria-label="ANORA Home">ANORA</a>
+      <ul class="nav-links nav-right" role="list">
+        <li><a href="index.html#journal" class="nav-link">Journal</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+      <ul role="list">
+        <li><a href="index.html#collection" class="mobile-nav-link">Collection</a></li>
+        <li><a href="heritage.html" class="mobile-nav-link">Heritage</a></li>
+        <li><a href="index.html#journal" class="mobile-nav-link">Journal</a></li>
+        <li><a href="index.html#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="heritage-page-hero" aria-label="Brand Heritage Hero">
+      <video autoplay muted loop playsinline disablepictureinpicture aria-hidden="true">
+        <source src="https://res.cloudinary.com/dtips5xbg/video/upload/v1780985925/anora-1_odehtj.mp4" type="video/mp4" />
+      </video>
+      <div class="heritage-page-hero-overlay" aria-hidden="true"></div>
+      <div class="heritage-page-hero-content reveal-up">
+        <p class="section-eyebrow">Brand Heritage</p>
+        <h1>The Art of<br /><em>ANORA</em></h1>
+        <p class="heritage-sanskrit">विशिष्टजनानां कृते निर्मितम्</p>
+      </div>
+    </section>
+
+    <!-- Sanskrit Quote -->
+    <section class="heritage-quote-section" aria-label="Brand philosophy">
+      <div class="heritage-divider" aria-hidden="true"></div>
+      <p class="heritage-quote reveal-up">
+        सुगन्धेन शोभते व्यक्तित्वम्
+      </p>
+      <p class="heritage-quote-translation reveal-up">
+        "Personality is adorned by fragrance"
+      </p>
+      <div class="heritage-divider" aria-hidden="true"></div>
+    </section>
+
+    <!-- Story Block 1 -->
+    <section class="heritage-story" aria-labelledby="story-title-1">
+      <div class="heritage-story-block reveal-up">
+        <div class="heritage-story-text">
+          <p class="section-eyebrow">Our Origin</p>
+          <h2 id="story-title-1">Designed for Those Who<br /><em>Leave a Lasting Impression</em></h2>
+          <p>ANORA was born from a singular obsession — to create fragrances that don't just scent the air, but transform the presence of those who wear them.</p>
+          <p>Designed exclusively for those who love to leave a memorable, sophisticated impression wherever they step. Each bottle is a statement. Each scent, a signature.</p>
+        </div>
+        <div class="heritage-story-media">
+          <video autoplay muted loop playsinline disablepictureinpicture aria-hidden="true">
+            <source src="https://res.cloudinary.com/dtips5xbg/video/upload/v1780985925/anora-1_odehtj.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <!-- Story Block 2 -->
+      <div class="heritage-story-block reverse reveal-up">
+        <div class="heritage-story-text">
+          <p class="section-eyebrow">Our Philosophy</p>
+          <h2>The Art of<br /><em>Timeless Elegance</em></h2>
+          <p>At ANORA, we believe that fragrance is more than just a scent — it is an expression of identity, a statement of sophistication, and a testament to refined taste.</p>
+          <p>Every fragrance note is chosen with intention. Every bottle crafted with care. Every drop carries the promise of an unforgettable impression.</p>
+        </div>
+        <div class="heritage-story-media">
+          <img
+            src="https://res.cloudinary.com/dtips5xbg/image/upload/f_auto,q_auto/anora-1_afkq6k"
+            alt="The Art of ANORA perfumery"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="heritage-values" aria-labelledby="values-title">
+      <div class="section-header reveal-up">
+        <p class="section-eyebrow">What We Stand For</p>
+        <h2 id="values-title" class="section-title">The ANORA Promise</h2>
+      </div>
+      <div class="heritage-values-grid">
+        <div class="heritage-value-item reveal-up">
+          <span class="heritage-value-number">✦</span>
+          <span class="heritage-value-label">Craftsmanship</span>
+          <p class="heritage-value-desc">Every fragrance is composed with meticulous attention — from raw ingredient to final bottle.</p>
+        </div>
+        <div class="heritage-value-item reveal-up">
+          <span class="heritage-value-number">✦</span>
+          <span class="heritage-value-label">Sophistication</span>
+          <p class="heritage-value-desc">Scents that speak before you do. Designed for the discerning, the refined, the unforgettable.</p>
+        </div>
+        <div class="heritage-value-item reveal-up">
+          <span class="heritage-value-number">✦</span>
+          <span class="heritage-value-label">Presence</span>
+          <p class="heritage-value-desc">ANORA is not worn — it is embodied. A lasting impression that outlives every room you enter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="heritage-cta-section reveal-up" aria-label="Explore collection">
+      <p class="section-eyebrow">Begin Your Journey</p>
+      <h2 class="section-title">Discover the Collection</h2>
+      <p style="font-size:0.9rem;color:rgba(229,211,179,0.5);max-width:440px;margin:0 auto 40px;line-height:1.8;font-family:var(--font-sans);font-weight:300;">
+        Each fragrance tells a story drawn from the finest ingredients across the world.
+      </p>
+      <a href="index.html#collection" class="btn btn-primary">Explore Collection</a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">ANORA</span>
+        <p>The Art of Lasting Presence</p>
+      </div>
+      <div class="footer-links" role="navigation" aria-label="Footer navigation">
+        <div class="footer-col">
+          <h4>Collection</h4>
+          <ul role="list">
+            <li><a href="index.html#collection">Signature Series</a></li>
+            <li><a href="#">Limited Editions</a></li>
+            <li><a href="#">Discovery Sets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Maison</h4>
+          <ul role="list">
+            <li><a href="heritage.html">Our Heritage</a></li>
+            <li><a href="index.html#journal">The Journal</a></li>
+            <li><a href="#">Bespoke Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul role="list">
+            <li><a href="https://www.instagram.com/anora.lab?igsh=MTc3cjZ6dGoycWZlbw%3D%3D" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider" aria-hidden="true"></div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 ANORA. All rights reserved.</p>
+      <div class="footer-social" aria-label="Social media links">
+        <a href="https://www.instagram.com/anora.lab?igsh=MTc3cjZ6dGoycWZlbw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="ANORA on Instagram" class="social-link">IG</a>
+        <a href="#" aria-label="ANORA on Pinterest" class="social-link">PT</a>
+        <a href="#" aria-label="ANORA on Facebook" class="social-link">FB</a>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

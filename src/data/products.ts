@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
     size:     'Eau de Parfum · 30ml',
     price:    499,
     image:    'https://res.cloudinary.com/dtips5xbg/image/upload/f_auto,q_auto/anora-1_afkq6k',
-    notes:    ['Rose', 'Jasmine', 'Bergamot', 'Musk'],
+    notes:    ['MUSK', 'नीलफलम्', 'Floral'],
     category: 'Intense · Sweet · Refreshing',
   },
 ]

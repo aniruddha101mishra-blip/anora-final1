@@ -46,6 +46,25 @@ export default function CheckoutPage() {
   const { cart, total, count, mounted, clearCart } = useCart()
   const router = useRouter()
 
+  // Read cart from URL param if coming from external HTML site
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const cartParam = params.get('cart')
+    if (cartParam) {
+      try {
+        const externalCart = JSON.parse(decodeURIComponent(cartParam))
+        if (Array.isArray(externalCart) && externalCart.length > 0) {
+          localStorage.setItem('anora_cart', JSON.stringify(externalCart))
+          // Clean URL without reload
+          window.history.replaceState({}, '', '/checkout')
+        }
+      } catch (e) {
+        console.warn('[Checkout] Failed to parse cart from URL:', e)
+      }
+    }
+  }, [])
+
   const [form,     setForm]     = useState<CustomerDetails>(EMPTY)
   const [errors,   setErrors]   = useState<Partial<CustomerDetails>>({})
   const [loading,  setLoading]  = useState(false)
