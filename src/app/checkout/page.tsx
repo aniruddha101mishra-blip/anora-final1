@@ -303,7 +303,7 @@ function Shell({ children, step }: { children: React.ReactNode; step: string }) 
 }
 
 /* ── Field component ── */
-interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface FieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string; label: string; required?: boolean
   value: string; onChange: (v: string) => void; error?: string
 }
