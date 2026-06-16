@@ -9,6 +9,7 @@
 
 import { PRODUCTS } from '@/data/products'
 import { ProductCard } from '@/components/ProductCard'
+import { ComboCard } from '@/components/ComboCard'
 import { Navbar } from '@/components/Navbar'
 
 export default function Home() {
@@ -76,6 +77,22 @@ export default function Home() {
             {PRODUCTS.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
+          </div>
+
+          {/* Combo offer */}
+          <div className="mt-12">
+            <div className="text-center mb-8">
+              <p className="text-[10px] tracking-[0.35em] uppercase text-gold-DEFAULT mb-3">
+                Exclusive Offer
+              </p>
+              <h3 className="font-serif text-3xl text-gold-DEFAULT font-light">
+                त्रयी कीर्तिः
+              </h3>
+              <p className="text-xs text-anora-vanilla/35 mt-2 tracking-wider">
+                All three fragrances · One unforgettable presence
+              </p>
+            </div>
+            <ComboCard />
           </div>
         </div>
       </section>
