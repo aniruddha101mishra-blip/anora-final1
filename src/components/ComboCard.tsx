@@ -4,33 +4,39 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/hooks/useCart'
-import { PRODUCTS, COMBO_PACK } from '@/data/products'
+import { COMBO_PACK } from '@/data/products'
+import type { Product } from '@/types'
+
+// Treat the combo as a single Product for cart purposes
+const COMBO_AS_PRODUCT: Product = {
+  id:       COMBO_PACK.id,
+  name:     COMBO_PACK.name,
+  tagline:  COMBO_PACK.tagline,
+  size:     COMBO_PACK.size,
+  price:    COMBO_PACK.price,
+  image:    COMBO_PACK.image,
+  notes:    COMBO_PACK.notes,
+  category: COMBO_PACK.category,
+}
 
 export function ComboCard() {
   const { addToCart } = useCart()
   const router = useRouter()
   const [added, setAdded] = useState(false)
 
-  // Add all 3 products to cart
-  const addComboToCart = () => {
-    COMBO_PACK.includes.forEach(id => {
-      const product = PRODUCTS.find(p => p.id === id)
-      if (product) addToCart(product)
-    })
-  }
-
   const handleAdd = () => {
-    addComboToCart()
+    addToCart(COMBO_AS_PRODUCT)
     setAdded(true)
     setTimeout(() => setAdded(false), 1800)
   }
 
   const handleBuyNow = () => {
-    addComboToCart()
+    addToCart(COMBO_AS_PRODUCT)
     router.push('/checkout')
   }
 
   const savings = COMBO_PACK.originalPrice - COMBO_PACK.price
+  const discountPct = Math.round((savings / COMBO_PACK.originalPrice) * 100)
 
   return (
     <article className="w-full max-w-2xl mx-auto bg-anora-card border border-gold-DEFAULT/35 hover:border-gold-DEFAULT/70 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden">
@@ -58,12 +64,12 @@ export function ComboCard() {
         {/* Info */}
         <div className="p-7 flex flex-col justify-between">
           <div>
-            {/* Main tag */}
+            {/* Main Sanskrit tag */}
             <p className="font-serif text-2xl text-gold-DEFAULT italic mb-1">
               त्रयी कीर्तिः
             </p>
             <p className="text-[10px] tracking-[0.2em] uppercase text-gold-DEFAULT/55 mb-4">
-              {COMBO_PACK.category}
+              Exclusive Combo · Pack of Three
             </p>
 
             <h3 className="font-serif text-xl text-anora-vanilla mb-1">
@@ -73,12 +79,12 @@ export function ComboCard() {
               {COMBO_PACK.size}
             </p>
 
-            {/* Included products */}
+            {/* Included fragrances */}
             <div className="space-y-1.5 mb-6">
               {COMBO_PACK.notes.map((n, i) => (
                 <div key={i} className="flex items-center gap-2 text-xs text-anora-vanilla/55">
                   <span className="text-gold-DEFAULT">✦</span>
-                  <span>Anora — {n}</span>
+                  <span>Anora — {n} · 10ml</span>
                 </div>
               ))}
             </div>
@@ -98,7 +104,7 @@ export function ComboCard() {
                 ₹{COMBO_PACK.originalPrice.toLocaleString('en-IN')}
               </span>
               <span className="text-[10px] text-green-400/70 tracking-wider">
-                {Math.round((savings / COMBO_PACK.originalPrice) * 100)}% off
+                {discountPct}% off
               </span>
             </div>
 

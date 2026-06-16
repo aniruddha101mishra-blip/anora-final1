@@ -37,11 +37,10 @@ export const COMBO_PACK = {
   id:       'anora-trayee',
   name:     'त्रयी कीर्तिः — Pack of Three',
   tagline:  'The complete ANORA collection — Cāru · Somā · Śiśir',
-  size:     '3 × Eau de Parfum · 30ml each',
+  size:     '3 × 10ml each · Cāru · Somā · Śiśir',
   price:    399,
   originalPrice: 1497,
   image:    'https://res.cloudinary.com/dtips5xbg/image/upload/f_auto,q_auto/v1781629690/IMG_20260616_210624_1_nozoha.png',
   notes:    ['Cāru', 'Somā', 'Śiśir'],
   category: 'त्रयी कीर्तिः · Exclusive Combo',
-  includes: ['anora-caru', 'anora-soma', 'anora-sisir'],
 }
