@@ -208,7 +208,7 @@ export default function CheckoutPage() {
               </div>
               <div className="border-t border-gold-DEFAULT/10 pt-4 mt-4 space-y-1.5">
                 <Row label="Subtotal"  value={`₹${subtotal.toLocaleString('en-IN')}`} />
-                <Row label="Delivery"  value={`₹${deliveryCharge}`} />
+                <Row label="Delivery" value={deliveryCharge === 0 ? 'Free' : `₹${deliveryCharge}`} valueClass={deliveryCharge === 0 ? 'text-green-400/65' : ''} />
                 <Row label="Total"     value={`₹${total.toLocaleString('en-IN')}`} bold />
               </div>
             </section>

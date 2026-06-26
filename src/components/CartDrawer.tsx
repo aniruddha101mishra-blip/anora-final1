@@ -129,8 +129,8 @@ export function CartDrawer({ open, onClose }: Props) {
             </div>
             <div className="flex justify-between items-center mb-3">
               <span className="text-[10px] uppercase tracking-[0.2em] text-anora-vanilla/35">Delivery</span>
-              <span className="text-sm text-anora-vanilla/60 font-light">
-                ₹{deliveryCharge.toLocaleString('en-IN')}
+              <span className={`text-sm font-light ${deliveryCharge === 0 ? 'text-green-400/70' : 'text-anora-vanilla/60'}`}>
+                {deliveryCharge === 0 ? 'Free' : `₹${deliveryCharge}`}
               </span>
             </div>
             <div className="flex justify-between items-center mb-4 pt-3 border-t border-gold-DEFAULT/10">

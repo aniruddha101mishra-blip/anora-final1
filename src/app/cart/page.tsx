@@ -138,7 +138,9 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between text-[10px] uppercase tracking-wider">
                 <span className="text-anora-vanilla/35">Delivery</span>
-                <span className="text-anora-vanilla/55">₹{deliveryCharge}</span>
+                <span className={deliveryCharge === 0 ? 'text-green-400/65' : 'text-anora-vanilla/55'}>
+                  {deliveryCharge === 0 ? 'Free' : `₹${deliveryCharge}`}
+                </span>
               </div>
               <div className="flex justify-between pt-1 border-t border-gold-DEFAULT/08">
                 <span className="text-[10px] uppercase tracking-wider text-anora-vanilla/45">Total</span>

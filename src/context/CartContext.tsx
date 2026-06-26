@@ -25,7 +25,7 @@ export const DELIVERY_CHARGE = 40
 interface CartContextValue {
   cart: CartItem[]
   subtotal: number
-  total: number        // subtotal + delivery
+  total: number
   deliveryCharge: number
   count: number
   mounted: boolean
@@ -99,8 +99,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const subtotal = useMemo(() => cart.reduce((s, i) => s + i.price * i.qty, 0), [cart])
-  const total    = useMemo(() => subtotal + (cart.length > 0 ? DELIVERY_CHARGE : 0), [subtotal, cart.length])
-  const count    = useMemo(() => cart.reduce((s, i) => s + i.qty, 0), [cart])
+
+  // ₹40 delivery only if cart has any 30ml item (price 299), else free
+  const hasSmallSize = useMemo(
+    () => cart.some(i => i.price === 299),
+    [cart]
+  )
+  const deliveryCharge = useMemo(
+    () => cart.length > 0 && hasSmallSize ? DELIVERY_CHARGE : 0,
+    [cart.length, hasSmallSize]
+  )
+  const total = useMemo(() => subtotal + deliveryCharge, [subtotal, deliveryCharge])
+  const count = useMemo(() => cart.reduce((s, i) => s + i.qty, 0), [cart])
 
   const value = useMemo<CartContextValue>(
     () => ({ cart, subtotal, total, deliveryCharge: DELIVERY_CHARGE, count, mounted, addToCart, removeFromCart, updateQty, clearCart }),

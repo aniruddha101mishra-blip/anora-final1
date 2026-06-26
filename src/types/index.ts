@@ -1,3 +1,10 @@
+export interface ProductVariant {
+  ml: number
+  price: number
+  size: string
+  freeShipping: boolean
+}
+
 export interface Product {
   id: string
   name: string
@@ -7,6 +14,7 @@ export interface Product {
   image: string
   notes: string[]
   category: string
+  variants: ProductVariant[]
 }
 
 export interface CartItem extends Product {
