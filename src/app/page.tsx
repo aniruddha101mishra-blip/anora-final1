@@ -9,7 +9,6 @@
 
 import { PRODUCTS } from '@/data/products'
 import { ProductCard } from '@/components/ProductCard'
-import { ComboCard } from '@/components/ComboCard'
 import { Navbar } from '@/components/Navbar'
 
 export default function Home() {
@@ -73,26 +72,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {PRODUCTS.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
-
-          {/* Combo offer */}
-          <div className="mt-12">
-            <div className="text-center mb-8">
-              <p className="text-[10px] tracking-[0.35em] uppercase text-gold-DEFAULT mb-3">
-                Exclusive Offer
-              </p>
-              <h3 className="font-serif text-3xl text-gold-DEFAULT font-light">
-                त्रयी कीर्तिः
-              </h3>
-              <p className="text-xs text-anora-vanilla/35 mt-2 tracking-wider">
-                All three fragrances · One unforgettable presence
-              </p>
-            </div>
-            <ComboCard />
           </div>
         </div>
       </section>
@@ -148,106 +131,6 @@ export default function Home() {
             </div>
 
           </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section id="reviews" className="py-28 px-4 bg-anora-bg">
-        <div className="max-w-5xl mx-auto">
-
-          <div className="text-center mb-16">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-gold-DEFAULT mb-5">
-              Voices
-            </p>
-            <h2 className="font-serif text-5xl text-gold-DEFAULT font-light">
-              What They Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                stars: 5,
-                text: '"ANORA is not a perfume — it is an experience. It has become my second skin. I receive compliments everywhere I go."',
-                name: 'Isabelle M.',
-                location: 'Paris',
-              },
-              {
-                stars: 5,
-                text: '"The craftsmanship is extraordinary. You can feel the quality from the moment you open the box. Simply divine."',
-                name: 'James T.',
-                location: 'London',
-              },
-              {
-                stars: 5,
-                text: '"I\'ve worn niche fragrances for fifteen years. ANORA stands apart. The depth, the longevity — nothing compares at this level."',
-                name: 'Nadia K.',
-                location: 'Dubai',
-              },
-              {
-                stars: 5,
-                text: '"Wearing ANORA is like wearing confidence. Every room I enter, people ask what fragrance I\'m wearing. Absolutely stunning."',
-                name: 'Priya S.',
-                location: 'Mumbai',
-              },
-              {
-                stars: 5,
-                text: '"The packaging alone is a work of art. But the fragrance itself — warm, long-lasting, sophisticated. Worth every rupee."',
-                name: 'Aryan M.',
-                location: 'Delhi',
-              },
-              {
-                stars: 5,
-                text: '"ANORA Cāru is my signature scent now. Refreshing yet intense — I never leave home without it."',
-                name: 'Sofia R.',
-                location: 'Bangalore',
-              },
-            ].map((review, i) => (
-              <div
-                key={i}
-                className="bg-anora-card border border-gold-DEFAULT/15 p-7 flex flex-col gap-4 hover:border-gold-DEFAULT/35 transition-colors duration-300"
-              >
-                {/* Stars */}
-                <div className="flex gap-1" aria-label={`${review.stars} stars`}>
-                  {Array.from({ length: review.stars }).map((_, s) => (
-                    <span key={s} className="text-gold-DEFAULT text-sm">★</span>
-                  ))}
-                </div>
-
-                {/* Review text */}
-                <p className="font-sans text-sm text-anora-vanilla/60 leading-relaxed font-light flex-1 italic">
-                  {review.text}
-                </p>
-
-                {/* Divider */}
-                <div className="w-8 h-px bg-gold-DEFAULT/30" />
-
-                {/* Reviewer */}
-                <div>
-                  <p className="font-serif text-base text-gold-DEFAULT">{review.name}</p>
-                  <p className="text-[10px] tracking-[0.18em] uppercase text-anora-vanilla/30 mt-0.5">
-                    {review.location}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Overall rating */}
-          <div className="mt-14 text-center">
-            <div className="inline-flex flex-col items-center gap-3 border border-gold-DEFAULT/15 px-12 py-8">
-              <span className="font-serif text-5xl text-gold-DEFAULT font-light">5.0</span>
-              <div className="flex gap-1">
-                {[1,2,3,4,5].map(s => (
-                  <span key={s} className="text-gold-DEFAULT text-lg">★</span>
-                ))}
-              </div>
-              <p className="text-[10px] tracking-[0.22em] uppercase text-anora-vanilla/35">
-                Based on 6 reviews
-              </p>
-            </div>
-          </div>
-
         </div>
       </section>
 
