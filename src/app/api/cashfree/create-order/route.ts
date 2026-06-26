@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createCashfreeOrder } from '@/lib/cashfree-api'
 import { generateOrderId } from '@/lib/orderId'
+import { getAdminDb } from '@/lib/firebase-admin'
+import { FieldValue } from 'firebase-admin/firestore'
 import type { CustomerDetails, CartItem } from '@/types'
 
 export const runtime = 'nodejs' // ensure Node.js runtime on Vercel
@@ -55,6 +57,31 @@ export async function POST(req: NextRequest) {
         notify_url: `${appUrl}/api/cashfree/webhook`,
       },
     })
+
+    // ── Save order to Firestore ──────────────────────────
+    try {
+      const db = getAdminDb()
+      await db.collection('orders').add({
+        orderId,
+        cashfreeOrderId: orderId,
+        customerName:    customer.name,
+        phone:           customer.phone,
+        email:           customer.email || '',
+        address:         `${customer.address}, ${customer.city}, ${customer.state} - ${customer.pin}`,
+        products: items.map(i => ({
+          id: i.id, name: i.name, size: i.size, price: i.price, qty: i.qty,
+        })),
+        totalAmount:   total,
+        paymentMethod: 'Cashfree',
+        orderStatus:   'PAYMENT_INITIATED',
+        createdAt:     FieldValue.serverTimestamp(),
+        updatedAt:     FieldValue.serverTimestamp(),
+      })
+      console.info('[API /create-order] Saved to Firestore ✓')
+    } catch (fbErr) {
+      // Non-critical — log but don't block payment
+      console.warn('[API /create-order] Firestore save failed (non-critical):', fbErr)
+    }
 
     // ── Send order details to email via Formspree ──
     try {
