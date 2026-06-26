@@ -20,10 +20,13 @@ import {
 import type { CartItem, Product } from '@/types'
 
 const CART_KEY = 'anora_cart'
+export const DELIVERY_CHARGE = 40
 
 interface CartContextValue {
   cart: CartItem[]
-  total: number
+  subtotal: number
+  total: number        // subtotal + delivery
+  deliveryCharge: number
   count: number
   mounted: boolean
   addToCart: (product: Product) => void
@@ -95,12 +98,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try { localStorage.removeItem(CART_KEY) } catch { /* ignore */ }
   }, [])
 
-  const total = useMemo(() => cart.reduce((s, i) => s + i.price * i.qty, 0), [cart])
-  const count = useMemo(() => cart.reduce((s, i) => s + i.qty, 0), [cart])
+  const subtotal = useMemo(() => cart.reduce((s, i) => s + i.price * i.qty, 0), [cart])
+  const total    = useMemo(() => subtotal + (cart.length > 0 ? DELIVERY_CHARGE : 0), [subtotal, cart.length])
+  const count    = useMemo(() => cart.reduce((s, i) => s + i.qty, 0), [cart])
 
   const value = useMemo<CartContextValue>(
-    () => ({ cart, total, count, mounted, addToCart, removeFromCart, updateQty, clearCart }),
-    [cart, total, count, mounted, addToCart, removeFromCart, updateQty, clearCart]
+    () => ({ cart, subtotal, total, deliveryCharge: DELIVERY_CHARGE, count, mounted, addToCart, removeFromCart, updateQty, clearCart }),
+    [cart, subtotal, total, count, mounted, addToCart, removeFromCart, updateQty, clearCart]
   )
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useCart } from '@/hooks/useCart'
 
 export default function CartPage() {
-  const { cart, total, count, mounted, removeFromCart, updateQty, clearCart } = useCart()
+  const { cart, total, subtotal, deliveryCharge, count, mounted, removeFromCart, updateQty, clearCart } = useCart()
   const router = useRouter()
 
   // Loading skeleton while localStorage hydrates
@@ -133,10 +133,14 @@ export default function CartPage() {
 
             <div className="border-t border-gold-DEFAULT/10 pt-4 space-y-2 mb-6">
               <div className="flex justify-between text-[10px] uppercase tracking-wider">
-                <span className="text-anora-vanilla/35">Shipping</span>
-                <span className="text-green-400/65">Free</span>
+                <span className="text-anora-vanilla/35">Subtotal</span>
+                <span className="text-anora-vanilla/55">₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between text-[10px] uppercase tracking-wider">
+                <span className="text-anora-vanilla/35">Delivery</span>
+                <span className="text-anora-vanilla/55">₹{deliveryCharge}</span>
+              </div>
+              <div className="flex justify-between pt-1 border-t border-gold-DEFAULT/08">
                 <span className="text-[10px] uppercase tracking-wider text-anora-vanilla/45">Total</span>
                 <span className="font-serif text-2xl text-gold-DEFAULT">
                   ₹{total.toLocaleString('en-IN')}

@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function CartDrawer({ open, onClose }: Props) {
-  const { cart, total, count, removeFromCart, updateQty } = useCart()
+  const { cart, total, subtotal, deliveryCharge, count, removeFromCart, updateQty } = useCart()
   const router = useRouter()
 
   useEffect(() => {
@@ -123,11 +123,22 @@ export function CartDrawer({ open, onClose }: Props) {
           <div className="border-t border-gold-DEFAULT/12 px-7 py-5 bg-anora-bg/50 flex-shrink-0">
             <div className="flex justify-between items-center mb-1">
               <span className="text-[10px] uppercase tracking-[0.2em] text-anora-vanilla/35">Subtotal</span>
+              <span className="text-sm text-anora-vanilla/60 font-light">
+                ₹{subtotal.toLocaleString('en-IN')}
+              </span>
+            </div>
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-anora-vanilla/35">Delivery</span>
+              <span className="text-sm text-anora-vanilla/60 font-light">
+                ₹{deliveryCharge.toLocaleString('en-IN')}
+              </span>
+            </div>
+            <div className="flex justify-between items-center mb-4 pt-3 border-t border-gold-DEFAULT/10">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-anora-vanilla/45">Total</span>
               <span className="font-serif text-2xl text-gold-DEFAULT font-light">
                 ₹{total.toLocaleString('en-IN')}
               </span>
             </div>
-            <p className="text-[10px] text-anora-vanilla/22 mb-4 tracking-wide">Free shipping on all orders</p>
             <button
               onClick={handleCheckout}
               className="w-full gold-gradient text-anora-espresso text-xs tracking-[0.22em] uppercase font-normal py-4 hover:opacity-90 transition-opacity mb-2"

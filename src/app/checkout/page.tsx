@@ -43,7 +43,7 @@ function loadCashfreeSDK(mode: string): Promise<void> {
 }
 
 export default function CheckoutPage() {
-  const { cart, total, count, mounted, clearCart } = useCart()
+  const { cart, total, subtotal, deliveryCharge, count, mounted, clearCart } = useCart()
   const router = useRouter()
 
   // Read cart from URL param if coming from external HTML site
@@ -207,8 +207,8 @@ export default function CheckoutPage() {
                 ))}
               </div>
               <div className="border-t border-gold-DEFAULT/10 pt-4 mt-4 space-y-1.5">
-                <Row label="Subtotal"  value={`₹${total.toLocaleString('en-IN')}`} />
-                <Row label="Shipping"  value="Free" valueClass="text-green-400/65" />
+                <Row label="Subtotal"  value={`₹${subtotal.toLocaleString('en-IN')}`} />
+                <Row label="Delivery"  value={`₹${deliveryCharge}`} />
                 <Row label="Total"     value={`₹${total.toLocaleString('en-IN')}`} bold />
               </div>
             </section>
