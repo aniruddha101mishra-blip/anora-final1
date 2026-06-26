@@ -5,7 +5,43 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { overflow-x: hidden; }
+  body {
+    overflow-x: hidden;
+    background-color: #E5D3B3;
+    color: #2A1F1A;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Navigation links */
+  nav a, nav button {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    font-weight: 500;
+  }
+
+  /* Product names — bold Inter */
+  .product-name-inter {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: #2A1F1A;
+  }
+
+  /* Body text */
+  .body-inter {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #2A1F1A;
+  }
 }
 
 @layer utilities {
@@ -16,6 +52,12 @@
   .border-gold-soft   { border-color: rgba(200,164,106,0.35); }
   .text-gold-muted    { color: rgba(200,164,106,0.55); }
   .bg-gold-tint       { background: rgba(200,164,106,0.06); }
+
+  /* Dark section override — hero, heritage */
+  .section-dark {
+    background-color: #0e0a05;
+    color: #E5D3B3;
+  }
 }
 
 /* Hide all native video controls including iOS Safari pause button */

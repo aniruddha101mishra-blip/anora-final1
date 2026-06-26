@@ -29,7 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <article className="w-full max-w-sm bg-anora-card border border-gold-DEFAULT/20 hover:border-gold-DEFAULT/55 transition-all duration-500 hover:-translate-y-2 group cursor-default flex flex-col">
+    <article className="w-full max-w-sm bg-white border border-gold-DEFAULT/20 hover:border-gold-DEFAULT/55 transition-all duration-500 hover:-translate-y-2 group cursor-default flex flex-col shadow-sm hover:shadow-md">
 
       {/* Image */}
       <div className="relative h-80 overflow-hidden flex-shrink-0">
@@ -52,11 +52,13 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Info */}
-      <div className="p-6 flex flex-col flex-1">
-        <p className="text-[10px] tracking-[0.18em] uppercase text-gold-DEFAULT/55 mb-1">
+      <div className="p-6 flex flex-col flex-1 bg-white">
+        <p className="text-[10px] tracking-[0.18em] uppercase text-gold-dark/70 mb-1">
           {product.category}
         </p>
-        <h3 className="font-serif text-xl text-anora-vanilla mb-1">{product.name}</h3>
+        <h3 className="font-sans text-[22px] font-bold leading-tight tracking-tight text-anora-espresso mb-1">
+          {product.name}
+        </h3>
 
         {/* Size selector */}
         <div className="flex gap-2 mt-3 mb-4">
@@ -76,13 +78,13 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
 
         {/* Selected size label */}
-        <p className="text-[10px] text-anora-vanilla/30 tracking-[0.12em] mb-4">
+        <p className="text-[13px] font-sans font-normal text-anora-espresso/40 leading-relaxed mb-4">
           {variant.size}
         </p>
 
         {/* Price + buttons */}
         <div className="flex items-center justify-between mt-auto">
-          <span className="font-serif text-xl text-gold-DEFAULT font-light">
+          <span className="font-sans text-xl font-bold text-anora-espresso">
             ₹{variant.price.toLocaleString('en-IN')}
           </span>
           <div className="flex gap-2">

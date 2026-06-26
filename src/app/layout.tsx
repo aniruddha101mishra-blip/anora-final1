@@ -7,7 +7,7 @@
  */
 
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Jost } from 'next/font/google'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { CartProvider } from '@/context/CartContext'
 import './globals.css'
 
@@ -19,10 +19,10 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 })
 
-const jost = Jost({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['200', '300', '400'],
-  variable: '--font-jost',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
-      <body className="bg-anora-bg text-anora-vanilla font-sans antialiased">
+    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+      <body className="bg-anora-vanilla text-anora-espresso font-sans antialiased">
         <CartProvider>
           {children}
         </CartProvider>

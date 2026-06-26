@@ -58,16 +58,16 @@ export default function Home() {
       </section>
 
       {/* Collection */}
-      <section id="collection" className="py-32 px-4">
+      <section id="collection" className="py-32 px-4 bg-anora-vanilla">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-gold-DEFAULT mb-5">
+            <p className="text-[10px] tracking-[0.35em] uppercase text-gold-dark mb-5">
               Signature Collection
             </p>
-            <h2 className="font-serif text-5xl md:text-6xl text-gold-DEFAULT font-light">
+            <h2 className="font-serif text-5xl md:text-6xl text-anora-espresso font-light">
               The Art of Scent
             </h2>
-            <p className="text-sm text-anora-vanilla/40 mt-4 max-w-md mx-auto leading-relaxed">
+            <p className="text-sm text-anora-espresso/50 mt-4 max-w-md mx-auto leading-relaxed">
               Each fragrance tells a story drawn from the finest ingredients across the world.
             </p>
           </div>

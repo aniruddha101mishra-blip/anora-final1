@@ -11,18 +11,18 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 border-b border-gold-DEFAULT/15 bg-anora-bg/92 backdrop-blur-md">
+      <header className="fixed top-0 inset-x-0 z-50 border-b border-gold-DEFAULT/20 bg-anora-vanilla/95 backdrop-blur-md">
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Link
               href="#collection"
-              className="text-xs tracking-[0.2em] uppercase text-anora-vanilla/55 hover:text-gold-DEFAULT transition-colors hidden sm:block"
+              className="text-[15px] tracking-[0.01em] font-medium text-anora-espresso/70 hover:text-gold-dark transition-colors hidden sm:block"
             >
               Collection
             </Link>
             <Link
               href="#heritage"
-              className="text-xs tracking-[0.2em] uppercase text-anora-vanilla/55 hover:text-gold-DEFAULT transition-colors hidden sm:block"
+              className="text-[15px] tracking-[0.01em] font-medium text-anora-espresso/70 hover:text-gold-dark transition-colors hidden sm:block"
             >
               Heritage
             </Link>
@@ -30,7 +30,7 @@ export function Navbar() {
 
           <Link
             href="/"
-            className="font-serif text-xl tracking-[0.28em] text-gold-DEFAULT"
+            className="font-serif text-xl tracking-[0.28em] text-anora-espresso"
           >
             ANORA
           </Link>
@@ -38,13 +38,13 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             <Link
               href="#contact"
-              className="text-xs tracking-[0.2em] uppercase text-anora-vanilla/55 hover:text-gold-DEFAULT transition-colors hidden sm:block"
+              className="text-[15px] tracking-[0.01em] font-medium text-anora-espresso/70 hover:text-gold-dark transition-colors hidden sm:block"
             >
               Contact
             </Link>
             <button
               onClick={() => setCartOpen(true)}
-              className="relative flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-gold-DEFAULT hover:text-gold-light transition-colors"
+              className="relative flex items-center gap-2 text-[15px] tracking-[0.01em] font-medium text-anora-espresso hover:text-gold-dark transition-colors"
               aria-label="Open cart"
             >
               <svg
@@ -62,13 +62,13 @@ export function Navbar() {
               </svg>
               Cart
               {count > 0 && (
-                <span className="absolute -top-2 -right-3 w-4 h-4 bg-gold-DEFAULT text-anora-espresso text-[9px] font-semibold rounded-full flex items-center justify-center">
+                <span className="absolute -top-2 -right-3 w-4 h-4 bg-gold-dark text-white text-[9px] font-semibold rounded-full flex items-center justify-center">
                   {count}
                 </span>
               )}
             </button>
             {count > 0 && (
-              <Link href="/cart" className="text-[9px] tracking-[0.12em] uppercase text-gold-DEFAULT/45 hover:text-gold-DEFAULT transition-colors hidden sm:block border-l border-gold-DEFAULT/15 pl-3">
+              <Link href="/cart" className="text-[13px] tracking-[0.01em] font-medium text-gold-dark hover:text-gold-DEFAULT transition-colors hidden sm:block border-l border-gold-DEFAULT/25 pl-3">
                 View
               </Link>
             )}

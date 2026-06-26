@@ -15,15 +15,26 @@ const config: Config = {
           dark:    '#b8904a',
         },
         anora: {
-          bg:       '#0e0a05',
-          card:     '#160f07',
-          espresso: '#2A1F1A',
-          vanilla:  '#E5D3B3',
+          bg:       '#E5D3B3',   // vanilla — default page background
+          card:     '#f0e8d8',   // slightly lighter vanilla for cards
+          espresso: '#2A1F1A',   // dark text
+          vanilla:  '#E5D3B3',   // vanilla accent
+          dark:     '#0e0a05',   // for hero/dark sections
         },
       },
       fontFamily: {
+        // Inter for UI — nav, buttons, body text
+        sans:  ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        // Cormorant for headings — product names, section titles
         serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
-        sans:  ['var(--font-jost)', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // Navigation
+        'nav':     ['15px', { lineHeight: '1.4', letterSpacing: '0.01em' }],
+        // Body text
+        'body':    ['15px', { lineHeight: '1.7', letterSpacing: '0em'    }],
+        // Product name
+        'product': ['22px', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '700' }],
       },
       keyframes: {
         pop: {
