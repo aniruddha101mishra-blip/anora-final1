@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="bg-anora-vanilla text-anora-espresso font-sans antialiased">
+      <body className="bg-anora-bg text-anora-espresso font-sans antialiased">
         <CartProvider>
           {children}
         </CartProvider>

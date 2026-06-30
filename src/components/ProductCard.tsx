@@ -10,11 +10,8 @@ export function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart()
   const router = useRouter()
 
-  // Selected variant — default to first (30ml)
-  const [selectedIdx, setSelectedIdx] = useState(0)
-  const [added, setAdded] = useState(false)
-
-  const variant  = product.variants[selectedIdx]
+  // Only one variant (100ml)
+  const variant  = product.variants[0]
   const cartItem = { ...product, price: variant.price, size: variant.size, id: `${product.id}-${variant.ml}ml` }
 
   const handleAdd = () => {
@@ -60,24 +57,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
 
-        {/* Size selector */}
-        <div className="flex gap-2 mt-3 mb-4">
-          {product.variants.map((v, i) => (
-            <button
-              key={v.ml}
-              onClick={() => setSelectedIdx(i)}
-              className={`flex-1 py-2 text-[10px] tracking-[0.12em] uppercase border transition-all duration-200 ${
-                selectedIdx === i
-                  ? 'bg-gold-DEFAULT text-anora-espresso border-gold-DEFAULT'
-                  : 'border-gold-DEFAULT/25 text-anora-vanilla/50 hover:border-gold-DEFAULT/55 hover:text-anora-vanilla/75'
-              }`}
-            >
-              {v.ml}ml
-            </button>
-          ))}
-        </div>
-
-        {/* Selected size label */}
+        {/* Size — single option, just show label */}
         <p className="text-[13px] font-sans font-normal text-anora-espresso/40 leading-relaxed mb-4">
           {variant.size}
         </p>

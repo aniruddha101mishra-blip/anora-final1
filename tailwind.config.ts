@@ -9,32 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Emerald green replaces gold throughout
         gold: {
-          DEFAULT: '#C8A46A',
-          light:   '#dbb87a',
-          dark:    '#b8904a',
+          DEFAULT: '#065f46',  // emerald-800 — primary green
+          light:   '#059669',  // emerald-600
+          dark:    '#064e3b',  // emerald-900
         },
         anora: {
-          bg:       '#E5D3B3',   // vanilla — default page background
-          card:     '#f0e8d8',   // slightly lighter vanilla for cards
-          espresso: '#2A1F1A',   // dark text
-          vanilla:  '#E5D3B3',   // vanilla accent
-          dark:     '#0e0a05',   // for hero/dark sections
+          bg:       '#ecfdf5',  // emerald-50 — very light green-white
+          card:     '#d1fae5',  // emerald-100
+          espresso: '#064e3b',  // emerald-900 — dark text
+          vanilla:  '#ecfdf5',  // light bg
+          dark:     '#022c22',  // darkest green
         },
       },
       fontFamily: {
-        // Inter for UI — nav, buttons, body text
         sans:  ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        // Cormorant for headings — product names, section titles
         serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
-      },
-      fontSize: {
-        // Navigation
-        'nav':     ['15px', { lineHeight: '1.4', letterSpacing: '0.01em' }],
-        // Body text
-        'body':    ['15px', { lineHeight: '1.7', letterSpacing: '0em'    }],
-        // Product name
-        'product': ['22px', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '700' }],
       },
       keyframes: {
         pop: {
