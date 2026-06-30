@@ -13,6 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
   // Only one variant (100ml)
   const variant  = product.variants[0]
   const cartItem = { ...product, price: variant.price, size: variant.size, id: `${product.id}-${variant.ml}ml` }
+  const [added, setAdded] = useState(false)
 
   const handleAdd = () => {
     addToCart(cartItem)
