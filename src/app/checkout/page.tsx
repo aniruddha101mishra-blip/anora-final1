@@ -42,9 +42,42 @@ function loadCashfreeSDK(mode: string): Promise<void> {
   })
 }
 
+const COUPONS: Record<string, number> = {
+  'OFF2000': 2000,
+}
+
 export default function CheckoutPage() {
   const { cart, total, subtotal, deliveryCharge, count, mounted, clearCart } = useCart()
   const router = useRouter()
+
+  const [couponInput,   setCouponInput]   = useState('')
+  const [couponApplied, setCouponApplied] = useState<string | null>(null)
+  const [couponDiscount, setCouponDiscount] = useState(0)
+  const [couponError,   setCouponError]   = useState<string | null>(null)
+
+  const grandTotal = Math.max(0, total - couponDiscount)
+
+  const applyCoupon = () => {
+    const code = couponInput.trim().toUpperCase()
+    if (!code) return
+    if (COUPONS[code]) {
+      setCouponApplied(code)
+      setCouponDiscount(COUPONS[code])
+      setCouponError(null)
+      console.info('[Coupon] Applied:', code, '→ -₹', COUPONS[code])
+    } else {
+      setCouponError('Invalid coupon code')
+      setCouponApplied(null)
+      setCouponDiscount(0)
+    }
+  }
+
+  const removeCoupon = () => {
+    setCouponApplied(null)
+    setCouponDiscount(0)
+    setCouponInput('')
+    setCouponError(null)
+  }
 
   // Read cart from URL param if coming from external HTML site
   useEffect(() => {
@@ -107,7 +140,7 @@ export default function CheckoutPage() {
       const res  = await fetch('/api/cashfree/create-order', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ customer: form, items: cart, total }),
+        body:    JSON.stringify({ customer: form, items: cart, total: grandTotal }),
       })
       const data = await res.json() as { payment_session_id?: string; order_id?: string; error?: string }
 
@@ -209,7 +242,10 @@ export default function CheckoutPage() {
               <div className="border-t border-gold-DEFAULT/10 pt-4 mt-4 space-y-1.5">
                 <Row label="Subtotal"  value={`₹${subtotal.toLocaleString('en-IN')}`} />
                 <Row label="Delivery" value={deliveryCharge === 0 ? 'Free' : `₹${deliveryCharge}`} valueClass={deliveryCharge === 0 ? 'text-green-400/65' : ''} />
-                <Row label="Total"     value={`₹${total.toLocaleString('en-IN')}`} bold />
+                {couponDiscount > 0 && (
+                  <Row label={`Coupon (${couponApplied})`} value={`-₹${couponDiscount.toLocaleString('en-IN')}`} valueClass="text-emerald-600 font-medium" />
+                )}
+                <Row label="Total" value={`₹${grandTotal.toLocaleString('en-IN')}`} bold />
               </div>
             </section>
 
@@ -241,6 +277,47 @@ export default function CheckoutPage() {
                 Payment
               </h2>
 
+              {/* Coupon code */}
+              <div className="mb-6">
+                <p className="text-[9px] tracking-[0.18em] uppercase text-anora-espresso/40 mb-2">
+                  Coupon Code
+                </p>
+                {couponApplied ? (
+                  <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 px-4 py-3 rounded-sm">
+                    <div>
+                      <p className="text-[13px] font-semibold text-emerald-700">{couponApplied}</p>
+                      <p className="text-[11px] text-emerald-600">−₹{couponDiscount.toLocaleString('en-IN')} applied</p>
+                    </div>
+                    <button
+                      onClick={removeCoupon}
+                      className="text-[11px] text-emerald-600 hover:text-red-500 transition-colors underline"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={couponInput}
+                      onChange={e => { setCouponInput(e.target.value.toUpperCase()); setCouponError(null) }}
+                      onKeyDown={e => e.key === 'Enter' && applyCoupon()}
+                      placeholder="Enter coupon code"
+                      className="flex-1 bg-gold-DEFAULT/5 border border-gold-DEFAULT/18 rounded-sm px-3 py-2.5 text-sm text-anora-espresso placeholder:text-anora-espresso/25 outline-none focus:border-gold-DEFAULT/50 uppercase tracking-widest"
+                    />
+                    <button
+                      onClick={applyCoupon}
+                      className="px-4 py-2.5 border border-gold-DEFAULT/35 text-[12px] font-medium text-gold-DEFAULT hover:bg-gold-DEFAULT hover:text-white transition-all rounded-sm"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                )}
+                {couponError && (
+                  <p className="text-[11px] text-red-500 mt-1.5">⚠ {couponError}</p>
+                )}
+              </div>
+
               <div className="flex gap-3 bg-gold-DEFAULT/5 border border-gold-DEFAULT/12 p-4 mb-6 rounded-sm">
                 <svg className="w-5 h-5 mt-0.5 flex-shrink-0 stroke-gold-DEFAULT/40" fill="none" strokeWidth={1.5} viewBox="0 0 24 24">
                   <rect x="1" y="4" width="22" height="16" rx="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -252,10 +329,15 @@ export default function CheckoutPage() {
               </div>
 
               <div className="text-center mb-7">
-                <p className="text-[9px] tracking-[0.22em] uppercase text-anora-vanilla/28 mb-1">Amount</p>
+                <p className="text-[9px] tracking-[0.22em] uppercase text-anora-espresso/28 mb-1">Amount</p>
                 <p className="font-serif text-5xl text-gold-DEFAULT font-light">
-                  ₹{total.toLocaleString('en-IN')}
+                  ₹{grandTotal.toLocaleString('en-IN')}
                 </p>
+                {couponDiscount > 0 && (
+                  <p className="text-[11px] text-emerald-600 mt-1">
+                    You save ₹{couponDiscount.toLocaleString('en-IN')} with {couponApplied}
+                  </p>
+                )}
               </div>
 
               {apiError && (
@@ -275,7 +357,7 @@ export default function CheckoutPage() {
                     Initialising Payment…
                   </>
                 ) : (
-                  `Pay ₹${total.toLocaleString('en-IN')} via Cashfree`
+                  `Pay ₹${grandTotal.toLocaleString('en-IN')} via Cashfree`
                 )}
               </button>
 
