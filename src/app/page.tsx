@@ -33,18 +33,19 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
         <div className="relative z-10 text-center px-6 animate-fadeUp">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-gold-DEFAULT/60 mb-5">
+          <p className="text-[10px] tracking-[0.4em] uppercase mb-5" style={{ color: '#f5efe0' }}>
             Luxury Fragrances
           </p>
-          <h1 className="font-serif text-6xl md:text-8xl text-gold-DEFAULT font-light tracking-[0.18em] mb-4">
+          <h1 className="font-serif text-6xl md:text-8xl font-light tracking-[0.18em] mb-4" style={{ color: '#f5efe0' }}>
             ANORA
           </h1>
-          <p className="font-sans text-xs tracking-[0.28em] uppercase text-anora-vanilla/50 mb-10">
+          <p className="font-sans text-xs tracking-[0.28em] uppercase mb-10" style={{ color: 'rgba(245,239,224,0.65)' }}>
             The Art of Lasting Presence
           </p>
           <a
             href="#collection"
-            className="inline-block gold-gradient text-anora-espresso text-xs tracking-[0.24em] uppercase font-normal px-10 py-4 transition-opacity hover:opacity-88"
+            className="inline-block text-xs tracking-[0.24em] uppercase font-medium px-10 py-4 transition-all hover:opacity-90 border"
+            style={{ borderColor: 'rgba(245,239,224,0.5)', color: '#f5efe0', background: 'rgba(245,239,224,0.08)' }}
           >
             Explore Collection
           </a>
